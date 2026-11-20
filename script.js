@@ -17,3 +17,19 @@ if (menuButton && mainNav) {
     });
   });
 }
+
+const backToToc = document.querySelector(".back-to-toc");
+
+if (backToToc) {
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - lastScrollY;
+
+    if (Math.abs(scrollDelta) >= 8) {
+      backToToc.classList.toggle("is-visible", scrollDelta < 0 && currentScrollY > 300);
+      lastScrollY = currentScrollY;
+    }
+  }, { passive: true });
+}
